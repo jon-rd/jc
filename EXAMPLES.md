@@ -13,7 +13,11 @@ acpi -V | jc --acpi -p          # or:  jc -p acpi -V
     "until_charged": "00:29:20",
     "design_capacity_mah": 2110,
     "last_full_capacity": 2271,
-    "last_full_capacity_percent": 100
+    "last_full_capacity_percent": 100,
+    "until_charged_hours": 0,
+    "until_charged_minutes": 29,
+    "until_charged_seconds": 20,
+    "until_charged_total_seconds": 1760
   },
   {
     "type": "Adapter",
@@ -51,6 +55,34 @@ acpi -V | jc --acpi -p          # or:  jc -p acpi -V
   {
     "type": "Cooling",
     "id": 1,
+    "messages": [
+      "Processor 0 of 10"
+    ]
+  },
+  {
+    "type": "Cooling",
+    "id": 2,
+    "messages": [
+      "x86_pkg_temp no state information available"
+    ]
+  },
+  {
+    "type": "Cooling",
+    "id": 3,
+    "messages": [
+      "Processor 0 of 10"
+    ]
+  },
+  {
+    "type": "Cooling",
+    "id": 4,
+    "messages": [
+      "intel_powerclamp no state information available"
+    ]
+  },
+  {
+    "type": "Cooling",
+    "id": 5,
     "messages": [
       "Processor 0 of 10"
     ]
@@ -465,19 +497,24 @@ date | jc --date -p          # or:  jc -p date
 ```json
 {
   "year": 2021,
-  "month_num": 3,
-  "day": 23,
-  "hour": 8,
-  "hour_24": 20,
-  "minute": 45,
-  "second": 29,
-  "period": "PM",
   "month": "Mar",
-  "weekday": "Tue",
-  "weekday_num": 2,
+  "month_num": 3,
+  "day": 25,
+  "weekday": "Thu",
+  "weekday_num": 4,
+  "hour": 2,
+  "hour_24": 2,
+  "minute": 2,
+  "second": 26,
+  "period": "AM",
   "timezone": "UTC",
-  "epoch": 1616557529,
-  "epoch_utc": 1616532329
+  "utc_offset": "+0000",
+  "day_of_year": 84,
+  "week_of_year": 12,
+  "iso": "2021-03-25T02:02:26+00:00",
+  "epoch": 1616662946,
+  "epoch_utc": 1616637746,
+  "timezone_aware": true
 }
 ```
 ### df
@@ -511,7 +548,7 @@ dig cnn.com www.cnn.com @205.251.194.64 | jc --dig -p          # or:  jc -p dig 
 ```json
 [
   {
-    "id": 5509,
+    "id": 52172,
     "opcode": "QUERY",
     "status": "NOERROR",
     "flags": [
@@ -533,38 +570,40 @@ dig cnn.com www.cnn.com @205.251.194.64 | jc --dig -p          # or:  jc -p dig 
         "name": "cnn.com.",
         "class": "IN",
         "type": "A",
-        "ttl": 60,
+        "ttl": 27,
+        "data": "151.101.65.67"
+      },
+      {
+        "name": "cnn.com.",
+        "class": "IN",
+        "type": "A",
+        "ttl": 27,
         "data": "151.101.129.67"
       },
       {
         "name": "cnn.com.",
         "class": "IN",
         "type": "A",
-        "ttl": 60,
-        "data": "151.101.193.67"
-      },
-      {
-        "name": "cnn.com.",
-        "class": "IN",
-        "type": "A",
-        "ttl": 60,
+        "ttl": 27,
         "data": "151.101.1.67"
       },
       {
         "name": "cnn.com.",
         "class": "IN",
         "type": "A",
-        "ttl": 60,
-        "data": "151.101.65.67"
+        "ttl": 27,
+        "data": "151.101.193.67"
       }
     ],
-    "query_time": 28,
+    "query_time": 38,
     "server": "2600",
-    "when": "Tue Nov 12 07:13:03 PST 2019",
-    "rcvd": 100
+    "when": "Tue Mar 30 20:07:59 PDT 2021",
+    "rcvd": 100,
+    "when_epoch": 1617160079,
+    "when_epoch_utc": null
   },
   {
-    "id": 62696,
+    "id": 36292,
     "opcode": "QUERY",
     "status": "NOERROR",
     "flags": [
@@ -620,10 +659,12 @@ dig cnn.com www.cnn.com @205.251.194.64 | jc --dig -p          # or:  jc -p dig 
         "data": "ns-576.awsdns-08.net."
       }
     ],
-    "query_time": 29,
+    "query_time": 27,
     "server": "205.251.194.64#53(205.251.194.64)",
-    "when": "Tue Nov 12 07:13:03 PST 2019",
-    "rcvd": 212
+    "when": "Tue Mar 30 20:07:59 PDT 2021",
+    "rcvd": 212,
+    "when_epoch": 1617160079,
+    "when_epoch_utc": null
   }
 ]
 ```
@@ -633,7 +674,7 @@ dig -x 1.1.1.1 | jc --dig -p          # or:  jc -p dig -x 1.1.1.1
 ```json
 [
   {
-    "id": 50324,
+    "id": 22191,
     "opcode": "QUERY",
     "status": "NOERROR",
     "flags": [
@@ -655,14 +696,61 @@ dig -x 1.1.1.1 | jc --dig -p          # or:  jc -p dig -x 1.1.1.1
         "name": "1.1.1.1.in-addr.arpa.",
         "class": "IN",
         "type": "PTR",
-        "ttl": 1634,
+        "ttl": 1800,
         "data": "one.one.one.one."
       }
     ],
-    "query_time": 36,
+    "query_time": 44,
     "server": "2600",
-    "when": "Tue Nov 12 07:13:49 PST 2019",
-    "rcvd": 78
+    "when": "Tue Mar 30 20:10:34 PDT 2021",
+    "rcvd": 78,
+    "when_epoch": 1617160234,
+    "when_epoch_utc": null
+  }
+]
+```
+### dir
+```bash
+dir | jc --dir -p          # or:  jc -p dir
+```
+```json
+
+[
+  {
+    "date": "03/24/2021",
+    "time": "03:15 PM",
+    "dir": true,
+    "size": null,
+    "filename": ".",
+    "parent": "C:\\Program Files\\Internet Explorer",
+    "epoch": 1616624100
+  },
+  {
+    "date": "03/24/2021",
+    "time": "03:15 PM",
+    "dir": true,
+    "size": null,
+    "filename": "..",
+    "parent": "C:\\Program Files\\Internet Explorer",
+    "epoch": 1616624100
+  },
+  {
+    "date": "12/07/2019",
+    "time": "02:49 AM",
+    "dir": true,
+    "size": null,
+    "filename": "en-US",
+    "parent": "C:\\Program Files\\Internet Explorer",
+    "epoch": 1575715740
+  },
+  {
+    "date": "12/07/2019",
+    "time": "02:09 AM",
+    "dir": false,
+    "size": 54784,
+    "filename": "ExtExport.exe",
+    "parent": "C:\\Program Files\\Internet Explorer",
+    "epoch": 1575713340
   }
 ]
 ```
@@ -710,6 +798,60 @@ dmidecode | jc --dmidecode -p          # or:  jc -p dmidecode
       "bios_revision": "4.6",
       "firmware_revision": "0.0"
     }
+  }
+]
+```
+### dpkg -l
+```bash
+dpkg -l | jc --dpkg-l -p          # or:  jc -p dpkg -l
+```
+```json
+[
+  {
+    "codes": "ii",
+    "name": "accountsservice",
+    "version": "0.6.45-1ubuntu1.3",
+    "architecture": "amd64",
+    "description": "query and manipulate user account information",
+    "desired": "install",
+    "status": "installed"
+  },
+  {
+    "codes": "rc",
+    "name": "acl",
+    "version": "2.2.52-3build1",
+    "architecture": "amd64",
+    "description": "Access control list utilities",
+    "desired": "remove",
+    "status": "config-files"
+  },
+  {
+    "codes": "uWR",
+    "name": "acpi",
+    "version": "1.7-1.1",
+    "architecture": "amd64",
+    "description": "displays information on ACPI devices",
+    "desired": "unknown",
+    "status": "trigger await",
+    "error": "reinstall required"
+  },
+  {
+    "codes": "rh",
+    "name": "acpid",
+    "version": "1:2.0.28-1ubuntu1",
+    "architecture": "amd64",
+    "description": "Advanced Configuration and Power Interface event daemon",
+    "desired": "remove",
+    "status": "half installed"
+  },
+  {
+    "codes": "pn",
+    "name": "adduser",
+    "version": "3.116ubuntu1",
+    "architecture": "all",
+    "description": "add and remove users and groups",
+    "desired": "purge",
+    "status": "not installed"
   }
 ]
 ```
@@ -1536,32 +1678,36 @@ cat keyvalue.txt | jc --kv -p
 ```
 ### last and lastb
 ```bash
-last | jc --last -p          # or:  jc -p last
+last -F | jc --last -p          # or:  jc -p last -F
 ```
 ```json
 [
   {
-    "user": "joeuser",
-    "tty": "ttys002",
-    "hostname": null,
-    "login": "Thu Feb 27 14:31",
-    "logout": "still logged in"
+    "user": "kbrazil",
+    "tty": "pts/0",
+    "hostname": "kbrazil-mac.attlocal.net",
+    "login": "Tue Jan 5 14:29:24 2021",
+    "logout": "still logged in",
+    "login_epoch": 1609885764
   },
   {
-    "user": "joeuser",
-    "tty": "ttys003",
+    "user": "kbrazil",
+    "tty": "tty1",
     "hostname": null,
-    "login": "Thu Feb 27 10:38",
-    "logout": "10:38",
-    "duration": "00:00"
+    "login": "Tue Jan 5 14:28:41 2021",
+    "logout": "still logged in",
+    "login_epoch": 1609885721
   },
   {
-    "user": "joeuser",
-    "tty": "ttys003",
-    "hostname": null,
-    "login": "Thu Feb 27 10:18",
-    "logout": "10:18",
-    "duration": "00:00"
+    "user": "reboot",
+    "tty": "system boot",
+    "hostname": "3.10.0-1062.1.2.el7.x86_64",
+    "login": "Tue Jan 5 14:28:28 2021",
+    "logout": "Tue Jan 5 14:29:36 2021",
+    "duration": "00:01",
+    "login_epoch": 1609885708,
+    "logout_epoch": 1609885776,
+    "duration_seconds": 68
   }
 ]
 ```
@@ -2481,7 +2627,15 @@ stat /bin/* | jc --stat -p          # or:  jc -p stat /bin/*
     "access_time": "2019-11-14 08:18:03.509681766 +0000",
     "modify_time": "2019-06-06 22:28:15.000000000 +0000",
     "change_time": "2019-08-12 17:21:29.521945390 +0000",
-    "birth_time": null
+    "birth_time": null,
+    "access_time_epoch": 1573748283,
+    "access_time_epoch_utc": 1573719483,
+    "modify_time_epoch": 1559885295,
+    "modify_time_epoch_utc": 1559860095,
+    "change_time_epoch": 1565655689,
+    "change_time_epoch_utc": 1565630489,
+    "birth_time_epoch": null,
+    "birth_time_epoch_utc": null
   },
   {
     "file": "/bin/btrfs",
@@ -2501,7 +2655,15 @@ stat /bin/* | jc --stat -p          # or:  jc -p stat /bin/*
     "access_time": "2019-11-14 08:18:28.990834276 +0000",
     "modify_time": "2018-03-12 23:04:27.000000000 +0000",
     "change_time": "2019-08-12 17:21:29.545944399 +0000",
-    "birth_time": null
+    "birth_time": null,
+    "access_time_epoch": 1573748308,
+    "access_time_epoch_utc": 1573719508,
+    "modify_time_epoch": 1520921067,
+    "modify_time_epoch_utc": 1520895867,
+    "change_time_epoch": 1565655689,
+    "change_time_epoch_utc": 1565630489,
+    "birth_time_epoch": null,
+    "birth_time_epoch_utc": null
   }
 ]
 ```
@@ -2618,6 +2780,42 @@ systemctl list-unit-files | jc --systemctl-luf -p          # or:  jc -p systemct
   }
 ]
 ```
+### /usr/bin/time
+```bash
+/usr/bin/time --verbose -o timefile.out sleep 2.5; cat timefile.out | jc --time -p
+```
+```json
+{
+  "command_being_timed": "sleep 2.5",
+  "user_time": 0.0,
+  "system_time": 0.0,
+  "cpu_percent": 0,
+  "elapsed_time": "0:02.50",
+  "average_shared_text_size": 0,
+  "average_unshared_data_size": 0,
+  "average_stack_size": 0,
+  "average_total_size": 0,
+  "maximum_resident_set_size": 2084,
+  "average_resident_set_size": 0,
+  "major_pagefaults": 0,
+  "minor_pagefaults": 72,
+  "voluntary_context_switches": 2,
+  "involuntary_context_switches": 1,
+  "swaps": 0,
+  "block_input_operations": 0,
+  "block_output_operations": 0,
+  "messages_sent": 0,
+  "messages_received": 0,
+  "signals_delivered": 0,
+  "page_size": 4096,
+  "exit_status": 0,
+  "elapsed_time_hours": 0,
+  "elapsed_time_minutes": 0,
+  "elapsed_time_seconds": 2,
+  "elapsed_time_centiseconds": 50,
+  "elapsed_time_total_seconds": 2.5
+}
+```
 ### timedatectl status
 ```bash
 timedatectl | jc --timedatectl -p          # or: jc -p timedatectl
@@ -2631,7 +2829,8 @@ timedatectl | jc --timedatectl -p          # or: jc -p timedatectl
   "ntp_enabled": true,
   "ntp_synchronized": true,
   "rtc_in_local_tz": false,
-  "dst_active": true
+  "dst_active": true,
+  "epoch_utc": 1583888001
 }
 ```
 ### tracepath
@@ -2767,18 +2966,88 @@ uname -a | jc --uname -p          # or:  jc -p uname -a
   "kernel_version": "#74-Ubuntu SMP Tue Sep 17 17:06:04 UTC 2019"
 }
 ```
+### upower
+```bash
+upower -i /org/freedesktop/UPower/devices/battery | jc --upower -p          # or jc -p upower -i /org/freedesktop/UPower/devices/battery
+```
+```json
+[
+  {
+    "native_path": "/sys/devices/LNXSYSTM:00/device:00/PNP0C0A:00/power_supply/BAT0",
+    "vendor": "NOTEBOOK",
+    "model": "BAT",
+    "serial": "0001",
+    "power_supply": true,
+    "updated": "Thu 11 Mar 2021 06:28:08 PM UTC",
+    "has_history": true,
+    "has_statistics": true,
+    "detail": {
+      "type": "battery",
+      "present": true,
+      "rechargeable": true,
+      "state": "charging",
+      "energy": 22.3998,
+      "energy_empty": 0.0,
+      "energy_full": 52.6473,
+      "energy_full_design": 62.16,
+      "energy_rate": 31.6905,
+      "voltage": 12.191,
+      "time_to_full": 57.3,
+      "percentage": 42.5469,
+      "capacity": 84.6964,
+      "technology": "lithium-ion",
+      "energy_unit": "Wh",
+      "energy_empty_unit": "Wh",
+      "energy_full_unit": "Wh",
+      "energy_full_design_unit": "Wh",
+      "energy_rate_unit": "W",
+      "voltage_unit": "V",
+      "time_to_full_unit": "minutes"
+    },
+    "history_charge": [
+      {
+        "time": 1328809335,
+        "percent_charged": 42.547,
+        "status": "charging"
+      },
+      {
+        "time": 1328809305,
+        "percent_charged": 42.02,
+        "status": "charging"
+      }
+    ],
+    "history_rate": [
+      {
+        "time": 1328809335,
+        "percent_charged": 31.691,
+        "status": "charging"
+      }
+    ],
+    "updated_seconds_ago": 441975,
+    "updated_epoch": 1615516088,
+    "updated_epoch_utc": 1615487288
+  }
+]
+```
 ### uptime
 ```bash
 uptime | jc --uptime -p          # or:  jc -p uptime
 ```
 ```json
 {
-  "time": "11:30:44",
-  "uptime": "1 day, 21:17",
-  "users": 1,
-  "load_1m": 0.01,
-  "load_5m": 0.04,
-  "load_15m": 0.05
+  "time": "11:35",
+  "uptime": "3 days, 4:03",
+  "users": 5,
+  "load_1m": 1.88,
+  "load_5m": 2.0,
+  "load_15m": 1.94,
+  "time_hour": 11,
+  "time_minute": 35,
+  "time_second": null,
+  "uptime_days": 3,
+  "uptime_hours": 4,
+  "uptime_minutes": 3,
+  "uptime_total_seconds": 273780
 }
 ```
 ### w
@@ -2854,13 +3123,15 @@ who | jc --who -p          # or:  jc -p who
   {
     "user": "joeuser",
     "tty": "ttyS0",
-    "time": "2020-03-02 02:52"
+    "time": "2020-03-02 02:52",
+    "epoch": 1583146320
   },
   {
     "user": "joeuser",
     "tty": "pts/0",
     "time": "2020-03-02 05:15",
-    "from": "192.168.71.1"
+    "from": "192.168.71.1",
+    "epoch": 1583154900
   }
 ]
 ```
@@ -2872,32 +3143,8 @@ who -a | jc --who -p          # or:  jc -p who -a
   {
     "event": "reboot",
     "time": "Feb 7 23:31",
-    "pid": 1
-  },
-  {
-    "user": "joeuser",
-    "writeable_tty": "-",
-    "tty": "console",
-    "time": "Feb 7 23:32",
-    "idle": "old",
-    "pid": 105
-  },
-  {
-    "user": "joeuser",
-    "writeable_tty": "+",
-    "tty": "ttys000",
-    "time": "Feb 13 16:44",
-    "idle": ".",
-    "pid": 51217,
-    "comment": "term=0 exit=0"
-  },
-  {
-    "user": "joeuser",
-    "writeable_tty": "?",
-    "tty": "ttys003",
-    "time": "Feb 28 08:59",
-    "idle": "01:36",
-    "pid": 41402
+    "pid": 1,
+    "epoch": null
   },
   {
     "user": "joeuser",
@@ -2906,7 +3153,8 @@ who -a | jc --who -p          # or:  jc -p who -a
     "time": "Mar 1 16:35",
     "idle": ".",
     "pid": 15679,
-    "from": "192.168.1.5"
+    "from": "192.168.1.5",
+    "epoch": null
   }
 ]
 ```
@@ -3025,3 +3273,5 @@ cat istio.yaml | jc --yaml -p
   }
 ]
 ```
+
+© 2019-2021 Kelly Brazil

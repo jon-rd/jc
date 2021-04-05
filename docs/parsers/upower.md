@@ -2,7 +2,9 @@
 # jc.parsers.upower
 jc - JSON CLI output utility `upower` command output parser
 
-Calculated epoch time field is naive (i.e. based on the local time of the system the parser is run on) since there is no unambiguous timezone information in the `upower` command output.
+The `updated_epoch` calculated timestamp field is naive (i.e. based on the local time of the system the parser is run on)
+
+The `updated_epoch_utc` calculated timestamp field is timezone-aware and is only available if the timezone field is UTC.
 
 Usage (cli):
 
@@ -31,7 +33,7 @@ Examples:
         "model": "BAT",
         "serial": "0001",
         "power_supply": true,
-        "updated": "Thu Feb 9 18:42:15 2012",
+        "updated": "Thu 11 Mar 2021 06:28:08 PM UTC",
         "has_history": true,
         "has_statistics": true,
         "detail": {
@@ -76,7 +78,9 @@ Examples:
             "status": "charging"
           }
         ],
-        "updated_seconds_ago": 1
+        "updated_seconds_ago": 441975,
+        "updated_epoch": 1615516088,
+        "updated_epoch_utc": 1615487288
       }
     ]
 
@@ -88,7 +92,7 @@ Examples:
         "model": "BAT",
         "serial": "0001",
         "power_supply": "yes",
-        "updated": "Thu Feb  9 18:42:15 2012 (1 seconds ago)",
+        "updated": "Thu 11 Mar 2021 06:28:08 PM UTC (441975 seconds ago)",
         "has_history": "yes",
         "has_statistics": "yes",
         "detail": {
@@ -158,7 +162,8 @@ Returns:
         "native_path":                  string,
         "power_supply":                 boolean,
         "updated":                      string,
-        "updated_epoch":                integer,       # works best with C locale. null if conversion fails
+        "updated_epoch":                integer,       # null if date-time conversion fails
+        "updated_epoch_utc":            integer,       # null if date-time conversion fails
         "updated_seconds_ago":          integer,
         "has_history":                  boolean,
         "has_statistics":               boolean,
