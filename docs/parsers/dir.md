@@ -1,3 +1,4 @@
+[Home](https://kellyjonbrazil.github.io/jc/)
 
 # jc.parsers.dir
 jc - JSON CLI output utility `dir` command output parser
@@ -12,24 +13,34 @@ The `epoch` calculated timestamp field is naive (i.e. based on the local time of
 
 Usage (cli):
 
-    $ dir | jc --dir
+    C:> dir | jc --dir
 
     or
 
-    $ jc dir
+    C:> jc dir
 
 Usage (module):
 
     import jc.parsers.dir
     result = jc.parsers.dir.parse(dir_command_output)
 
-Compatibility:
+Schema:
 
-    'win32'
+    [
+      {
+        "date":         string,
+        "time":         string,
+        "epoch":        integer,    # naive timestamp
+        "dir":          boolean,
+        "size":         integer,
+        "filename:      string,
+        "parent":       string
+      }
+    ]
 
 Examples:
 
-    $ dir | jc --dir -p
+    C:> dir | jc --dir -p
     [
       {
         "date": "03/24/2021",
@@ -70,7 +81,7 @@ Examples:
       ...
     ]
 
-    $ dir | jc --dir -p -r
+    C:> dir | jc --dir -p -r
     [
       {
         "date": "03/24/2021",
@@ -112,35 +123,7 @@ Examples:
 ```python
 info()
 ```
-
-
-## process
-```python
-process(proc_data)
-```
-
-Final processing to conform to the schema.
-
-Parameters:
-
-    proc_data:   (Dictionary of Lists) raw structured data to process
-
-Returns:
-
-    List of Dictionaries. Structured data with the following schema:
-
-    [
-      {
-        "date":         string,
-        "time":         string,
-        "epoch":        integer,    # naive timestamp
-        "dir":          boolean,
-        "size":         integer,
-        "filename:      string,
-        "parent":       string
-      }
-    ]
-
+Provides parser metadata (version, author, etc.)
 
 ## parse
 ```python
@@ -159,3 +142,7 @@ Returns:
 
     List of Dictionaries. Raw or processed structured data.
 
+## Parser Information
+Compatibility:  win32
+
+Version 1.1 by Rasheed Elsaleh (rasheed@rebelliondefense.com)

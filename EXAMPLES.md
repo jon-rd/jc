@@ -714,7 +714,6 @@ dig -x 1.1.1.1 | jc --dig -p          # or:  jc -p dig -x 1.1.1.1
 dir | jc --dir -p          # or:  jc -p dir
 ```
 ```json
-
 [
   {
     "date": "03/24/2021",
@@ -948,6 +947,39 @@ file * | jc --file -p          # or:  jc -p file *
   {
     "filename": "centosserial.sh",
     "type": "Bourne-Again shell script text executable, UTF-8 Unicode text"
+  }
+]
+```
+### finger
+```bash
+finger | jc --finger -p          # or:  jc -p finger
+```
+```json
+[
+  {
+    "login": "jdoe",
+    "name": "John Doe",
+    "tty": "tty1",
+    "idle": "14d",
+    "login_time": "Mar 22 21:14",
+    "tty_writeable": false,
+    "idle_minutes": 0,
+    "idle_hours": 0,
+    "idle_days": 14,
+    "total_idle_minutes": 20160
+  },
+  {
+    "login": "jdoe",
+    "name": "John Doe",
+    "tty": "pts/0",
+    "idle": null,
+    "login_time": "Apr  5 15:33",
+    "details": "(192.168.1.22)",
+    "tty_writeable": true,
+    "idle_minutes": 0,
+    "idle_hours": 0,
+    "idle_days": 0,
+    "total_idle_minutes": 0
   }
 ]
 ```
@@ -2443,6 +2475,63 @@ route -ee | jc --route -p          # or:  jc -p route -ee
     "flags_pretty": [
       "UP"
     ]
+  }
+]
+```
+### rpm -qi
+```bash
+rpm_qia | jc --rpm_qi -p          # or:  jc -p rpm -qia
+```
+```json
+[
+  {
+    "name": "make",
+    "epoch": 1,
+    "version": "3.82",
+    "release": "24.el7",
+    "architecture": "x86_64",
+    "install_date": "Wed 16 Oct 2019 09:21:42 AM PDT",
+    "group": "Development/Tools",
+    "size": 1160660,
+    "license": "GPLv2+",
+    "signature": "RSA/SHA256, Thu 22 Aug 2019 02:34:59 PM PDT, Key ID 24c6a8a7f4a80eb5",
+    "source_rpm": "make-3.82-24.el7.src.rpm",
+    "build_date": "Thu 08 Aug 2019 05:47:25 PM PDT",
+    "build_host": "x86-01.bsys.centos.org",
+    "relocations": "(not relocatable)",
+    "packager": "CentOS BuildSystem <http://bugs.centos.org>",
+    "vendor": "CentOS",
+    "url": "http://www.gnu.org/software/make/",
+    "summary": "A GNU tool which simplifies the build process for users",
+    "description": "A GNU tool for controlling the generation of executables and other...",
+    "build_epoch": 1565311645,
+    "build_epoch_utc": null,
+    "install_date_epoch": 1571242902,
+    "install_date_epoch_utc": null
+  },
+  {
+    "name": "kbd-legacy",
+    "version": "1.15.5",
+    "release": "15.el7",
+    "architecture": "noarch",
+    "install_date": "Thu 15 Aug 2019 10:53:08 AM PDT",
+    "group": "System Environment/Base",
+    "size": 503608,
+    "license": "GPLv2+",
+    "signature": "RSA/SHA256, Mon 12 Nov 2018 07:17:49 AM PST, Key ID 24c6a8a7f4a80eb5",
+    "source_rpm": "kbd-1.15.5-15.el7.src.rpm",
+    "build_date": "Tue 30 Oct 2018 03:40:00 PM PDT",
+    "build_host": "x86-01.bsys.centos.org",
+    "relocations": "(not relocatable)",
+    "packager": "CentOS BuildSystem <http://bugs.centos.org>",
+    "vendor": "CentOS",
+    "url": "http://ftp.altlinux.org/pub/people/legion/kbd",
+    "summary": "Legacy data for kbd package",
+    "description": "The kbd-legacy package contains original keymaps for kbd package...",
+    "build_epoch": 1540939200,
+    "build_epoch_utc": null,
+    "install_date_epoch": 1565891588,
+    "install_date_epoch_utc": null
   }
 ]
 ```
